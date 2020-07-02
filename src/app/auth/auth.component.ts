@@ -1,19 +1,29 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { AuthService, AuthResponseData } from './auth.service';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
     selector: 'app-auth',
     templateUrl: './auth.component.html'
 })
-export class AuthComponent {
+export class AuthComponent implements OnInit {
     loginMode = true;
     appLoading = false;
     error = '';
     authForm: NgForm;
 
-    constructor(private authService: AuthService) {}
+    constructor(
+        private authService: AuthService,
+        private route: ActivatedRoute
+        ) {}
+
+    ngOnInit() {
+        if (this.route.snapshot.paramMap.get('reqAuthentication')) {
+            this.error = 'Please login to access login Page';
+        }
+    }
 
     onSwitchLogin() {
         this.loginMode = !this.loginMode;
