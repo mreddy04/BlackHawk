@@ -41,8 +41,8 @@ export class ProductsService {
         this.products = data;
     }
 
-    getProducts(data) {
-        return this.products.slice();
+    getProducts() {
+        return this.products;
     }
 
     getProductById(id) {

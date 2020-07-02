@@ -3,6 +3,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { AuthComponent } from './auth/auth.component';
 import { ProductListComponent } from './product-list/product-list.component';
 import { ProductDetailComponent } from './product-list/product-detail/product-detail.component';
+import { ProductResolverService } from './product-list/products-resolver.service';
 
 
 const appRoutes: Routes = [
@@ -10,7 +11,8 @@ const appRoutes: Routes = [
     { path: 'products', component: ProductListComponent },
     {
         path: 'products/:id',
-        component: ProductDetailComponent
+        component: ProductDetailComponent,
+        resolve: [ProductResolverService]
     },
     { path: 'auth', component: AuthComponent }
 ];
