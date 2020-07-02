@@ -1,0 +1,33 @@
+<div class="row justify-content-md-center">
+    <div class="col-md-6">
+        <img src="../../assets/images/logo.jpeg" class="img-fluid" alt="Responsive image" style="height: 100px;">
+        <div class="row justify-content-md-center" *ngIf="appLoading">
+          <app-loading></app-loading>
+        </div>
+        <form #authForm="ngForm" (ngSubmit)="onSubmit(authForm)" *ngIf="!appLoading">
+        <div class="alert alert-danger" *ngIf="error">
+            <p>{{error}}</p>
+        </div>
+        <div class="form-group">
+            <label for="email">Email address:</label>
+            <input type="email" class="form-control" placeholder="Enter email" id="email"
+            ngModel name="email" email required>
+        </div>
+        <div class="form-group">
+            <label for="pwd">Password:</label>
+            <input type="password" class="form-control" placeholder="Enter password" id="pwd"
+            ngModel name="password" required minlength="6">
+        </div>
+        <div class="d-flex justify-content-between">
+            <button type="submit" class="btn btn-primary"
+                type="submit" [disabled]="!authForm.valid">
+                {{ loginMode ? 'Sign In' : 'Sign Up'}}
+            </button>
+            <button class="btn btn-primary pull-right"
+                (click)="onSwitchLogin()" type="button">
+                {{ loginMode ? 'Back to Sign Up' : 'Back to Sign In'}}
+            </button>
+        </div>
+        </form>
+    </div>
+</div>

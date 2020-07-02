@@ -1,0 +1,24 @@
+<header class="mt-2">
+    <h2>{{ product.name}}</h2>
+</header>
+<div class="row mt-3">
+  <div class="col">
+    <img src="{{product.imageUrl}}" class="img-thumbnail container-fluid no-padding" alt="{{product.name}}">
+  </div>
+  <div class="col">
+    <div class="row">
+        <h5>Description:</h5>
+        <span>{{ product.descriptions}}</span>
+    </div>
+    <div class="row mt-2">
+        <h5>Price: </h5>
+        <span> {{ product.price | currency}}</span>
+    </div>
+    <div class="row mt-2">
+      <h5> Availability: </h5>
+      <span *ngIf="isProductInStock">Hurry Up Limited stock</span>
+      <span *ngIf="!isProductInStock">Sorry, we will notify you once product is in stock</span>
+    </div>
+      <button type="button" class="btn btn-primary" [disabled]="!isProductInStock">ADD TO CART</button>
+  </div>
+</div>

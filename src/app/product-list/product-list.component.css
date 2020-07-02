@@ -1,0 +1,28 @@
+.card .card-body .card-title.small {
+    height: 22px;
+    overflow: hidden;
+}
+
+.card .card-body .img-container {
+    height: 200px;
+}
+.card .card-body img.rounded {
+  height: 200px;
+}
+.card {
+    cursor: pointer;
+}
+.card:hover {
+  cursor: pointer;
+  background-color: #dedede;
+}
+.pagination .page-item .page-link {
+    cursor: pointer;
+}
+.pagination .page-item .page-link.active {
+    background-color: orange;
+}
+.pagination .page-item .page-link.disabled {
+  background-color: #bcbcbc;
+  cursor: not-allowed;
+}
