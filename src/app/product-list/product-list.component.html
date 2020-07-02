@@ -1,20 +1,24 @@
 <div class="container">
-    <div class="row mb-4">
-      <div class="col-sm-3 mt-3"
-        *ngFor="let item of productList | keyvalue | slice: pageNumber * size : ( (pageNumber + 1) * size )">
-        <div class="card" (click)="goToProduceDetails(item.key)">
-          <div class="card-body">
-            <h6 class="card-title">{{item.value.name}}</h6>
-            <div class="img-container">
-                <img [src]="item.value.imageUrl" class="rounded container-fluid no-padding"
-                  alt="{{item.value.name}}">
-            </div>
-            <p class="card-text mt-1">Price: {{item.value.price}}</p>
-          </div>
+    <div class="row justify-content-md-center mb-4">
+        <div *ngIf="appLoading">
+            <app-loading></app-loading>
         </div>
-      </div>
+        <ng-container *ngIf="!appLoading">
+            <div class="col-sm-3 mt-3"
+                *ngFor="let item of productList | keyvalue | slice: pageNumber * size : ( (pageNumber + 1) * size )">
+                <div class="card" (click)="goToProduceDetails(item.key)">
+                    <div class="card-body">
+                        <h6 class="card-title">{{item.value.name}}</h6>
+                        <div class="img-container">
+                            <img [src]="item.value.imageUrl" class="rounded container-fluid no-padding" alt="{{item.value.name}}">
+                        </div>
+                        <p class="card-text mt-1">Price: {{item.value.price | currency}}</p>
+                    </div>
+                </div>
+            </div>
+        </ng-container>
     </div>
-    <div class="row mb-5 justify-content-center">
+    <div class="row mb-5 justify-content-center" *ngIf="!appLoading">
       <ul class="pagination">
         <li class="page-item" (click)="getPage(-1)">
             <a class="page-link" [ngClass]="{'disabled': pageNumber === 0}">Previous</a>

@@ -12,6 +12,7 @@ import { ProductListComponent } from './product-list/product-list.component';
 import { ProductDetailComponent } from './product-list/product-detail/product-detail.component';
 import { FooterComponent } from './footer/footer.component';
 import { LoadingComponent } from './common/loading/loading-component';
+import { HomePageComponent } from './home-page/home-page.component';
 
 @NgModule({
   declarations: [
@@ -21,7 +22,8 @@ import { LoadingComponent } from './common/loading/loading-component';
     ProductListComponent,
     ProductDetailComponent,
     FooterComponent,
-    LoadingComponent
+    LoadingComponent,
+    HomePageComponent
   ],
   imports: [
     BrowserModule,

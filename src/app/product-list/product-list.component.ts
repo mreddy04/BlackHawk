@@ -16,21 +16,31 @@ export class ProductListComponent implements OnInit {
     totalCount;
     pageCount;
     pages;
+    appLoading = false;
 
   constructor(private service: ProductsService,
       private router: Router) { }
 
   ngOnInit() {
+      this.productBackupList = this.service.getProducts();
+      if (this.productBackupList.length > 0) {
+          this.initPage(this.productBackupList);
+      }
+      this.appLoading = true;
       this.service.fetchItems().subscribe( data => {
-           this.productBackupList  = data;
-           this.productList = { ...this.productBackupList };
-           this.start = 0;
-           this.pageNumber = 0;
-           this.totalCount = Object.keys(data).length;
-          this.pageCount = Math.ceil(this.totalCount / this.size);
-          this.getArray();
-
+           this.appLoading = false;
+            this.productBackupList = data;
+           this.initPage(data);
       });
+  }
+
+  initPage(data) {
+      this.productList = { ...this.productBackupList };
+      this.start = 0;
+      this.pageNumber = 0;
+      this.totalCount = Object.keys(data).length;
+      this.pageCount = Math.ceil(this.totalCount / this.size);
+      this.getArray();
   }
 
   getPage(v) {

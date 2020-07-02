@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { catchError, tap } from 'rxjs/operators';
-import { throwError, Subject } from 'rxjs';
+import { throwError, BehaviorSubject } from 'rxjs';
 
 export interface AuthResponseData {
     idToken: string;
@@ -22,11 +22,9 @@ export class User {
 
 }
 
-
 @Injectable({providedIn: 'root'})
 export class AuthService {
-    userAuthenticated = new Subject();
-    user: User;
+    user = new BehaviorSubject<User>(null);=
     constructor (
         private http: HttpClient,
         private router: Router) {}
@@ -41,7 +39,7 @@ export class AuthService {
             }
         ).pipe(
             catchError((responseErr: HttpErrorResponse) => {
-                this.userAuthenticated.next(false);
+                this.user.next(null);
                 let errorMessage = 'Error Occurred';
                 if (!responseErr.error || !responseErr.error.error) {
                     return throwError(errorMessage);
@@ -61,9 +59,8 @@ export class AuthService {
             }),
             tap( responseData => {
                 const user = new User(responseData.email, responseData.localId, responseData.idToken);
-                this.user = user;
-                this.userAuthenticated.next(user);
-                this.router.navigate(['/products']);
+                this.user.next(user);
+                this.router.navigate(['/']);
             })
         );
     }
@@ -78,7 +75,7 @@ export class AuthService {
             }
         ).pipe(
             catchError((responseErr: HttpErrorResponse) => {
-                this.userAuthenticated.next(false);
+                this.user.next(null);
                 let errorMessage = 'Error Occurred';
                 if (!responseErr.error || !responseErr.error.error) {
                     return throwError(errorMessage);
@@ -98,10 +95,14 @@ export class AuthService {
             }),
             tap(responseData => {
                 const user = new User(responseData.email, responseData.localId, responseData.idToken);
-                this.user = user;
-                this.userAuthenticated.next(user);
-                this.router.navigate(['/products']);
+                this.user.next(user);
+                this.router.navigate(['/']);
             })
         );
+    }
+
+    logout() {
+        this.user.next(null);
+        this.router.navigate(['/auth']);
     }
 }

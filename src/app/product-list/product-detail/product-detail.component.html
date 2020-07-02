@@ -17,8 +17,10 @@
     <div class="row mt-2">
       <h5> Availability: </h5>
       <span *ngIf="isProductInStock">Hurry Up Limited stock</span>
-      <span *ngIf="!isProductInStock">Sorry, we will notify you once product is in stock</span>
+      <span *ngIf="!isProductInStock">Sorry for inconvenience, we will notify you once product is in Stock</span>
     </div>
+    <div class="row mt-2">
       <button type="button" class="btn btn-primary" [disabled]="!isProductInStock">ADD TO CART</button>
+    </div>
   </div>
 </div>

@@ -8,7 +8,7 @@ import { AuthService, AuthResponseData } from './auth.service';
     templateUrl: './auth.component.html'
 })
 export class AuthComponent {
-    loginMode = false;
+    loginMode = true;
     appLoading = false;
     error = '';
     authForm: NgForm;

@@ -18,11 +18,11 @@ export class HeaderComponent implements OnInit {
     }
 
     onLogout() {
-        this.isAuthenticated = false;
+        this.authService.logout();
     }
 
     ngOnInit() {
-        this.subscription = this.authService.userAuthenticated.subscribe(isAuthenticated => {
+        this.subscription = this.authService.user.subscribe(isAuthenticated => {
             this.isAuthenticated = !!isAuthenticated;
         });
     }
