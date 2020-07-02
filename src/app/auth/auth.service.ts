@@ -22,9 +22,11 @@ export class User {
 
 }
 
+export const fireBaseApiKey = 'AIzaSyBLdDODqKDs14opmagw-_m8n_KZsIQqTY0';
+
 @Injectable({providedIn: 'root'})
 export class AuthService {
-    user = new BehaviorSubject<User>(null);=
+    user = new BehaviorSubject<User>(null);
     constructor (
         private http: HttpClient,
         private router: Router) {}
