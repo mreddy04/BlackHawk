@@ -21,7 +21,7 @@ export class AuthComponent implements OnInit {
 
     ngOnInit() {
         if (this.route.snapshot.paramMap.get('reqAuthentication')) {
-            this.error = 'Please login to access login Page';
+            this.error = 'Please login to access Product Page';
         }
     }
 

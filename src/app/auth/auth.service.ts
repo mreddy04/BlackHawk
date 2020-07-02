@@ -22,7 +22,6 @@ export class User {
 
 }
 
-
 @Injectable({providedIn: 'root'})
 export class AuthService {
     user = new BehaviorSubject<User>(null);
