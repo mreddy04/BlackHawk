@@ -9,7 +9,7 @@ import { HomePageComponent } from './home-page/home-page.component';
 
 
 const appRoutes: Routes = [
-    { path: '', component: HomePageComponent, pathMatch: 'full' },
+    { path: '/', component: HomePageComponent, pathMatch: 'full' },
     { path: 'products', component: ProductListComponent },
     {
         path: 'products/:id',
