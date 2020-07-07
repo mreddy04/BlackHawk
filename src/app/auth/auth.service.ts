@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { catchError, tap } from 'rxjs/operators';
-import { throwError, BehaviorSubject } from 'rxjs';
+import { throwError, BehaviorSubject, Subject } from 'rxjs';
 
 export interface AuthResponseData {
     idToken: string;
@@ -22,9 +22,13 @@ export class User {
 
 }
 
+export const fireBaseApiKey = 'AIzaSyBLdDODqKDs14opmagw-_m8n_KZsIQqTY0';
+
 @Injectable({providedIn: 'root'})
 export class AuthService {
     user = new BehaviorSubject<User>(null);
+    captchReq = new Subject();
+    countFailAttempts = 0;
     constructor (
         private http: HttpClient,
         private router: Router) {}
@@ -89,6 +93,11 @@ export class AuthService {
                         break;
                     case 'INVALID_PASSWORD':
                         errorMessage = 'Invalid password';
+                        if (this.countFailAttempts > 0) {
+                            errorMessage = 'Please Login with Captcha';
+                        } else {
+                            this.countFailAttempts++;
+                        }
                         break;
                 }
                 return throwError(errorMessage);

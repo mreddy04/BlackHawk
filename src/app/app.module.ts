@@ -2,6 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
+import { RecaptchaModule } from 'ng-recaptcha';
 
 import { AppRoutingModule } from './app-route.module';
 
@@ -29,7 +30,8 @@ import { HomePageComponent } from './home-page/home-page.component';
     BrowserModule,
     FormsModule,
     HttpClientModule,
-    AppRoutingModule
+    AppRoutingModule,
+    RecaptchaModule
   ],
   providers: [],
   bootstrap: [AppComponent]

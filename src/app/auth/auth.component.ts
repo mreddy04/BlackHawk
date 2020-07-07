@@ -3,6 +3,8 @@ import { NgForm } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { AuthService, AuthResponseData } from './auth.service';
 import { ActivatedRoute } from '@angular/router';
+import { CaptchaComponent } from 'angular-captcha';
+
 
 @Component({
     selector: 'app-auth',
@@ -13,6 +15,8 @@ export class AuthComponent implements OnInit {
     appLoading = false;
     error = '';
     authForm: NgForm;
+    showCaptcha = false;
+    recaptcha;
 
     constructor(
         private authService: AuthService,
@@ -47,8 +51,16 @@ export class AuthComponent implements OnInit {
             this.error = '';
         }, error => {
             this.error = error;
+            if (this.error === 'Please Login with Captcha') {
+                this.showCaptcha = true;
+            }
             this.appLoading = false;
         });
+    }
+
+    resolved(captchaRes) {
+        this.recaptcha = captchaRes;
+        console.log(this.recaptcha);
     }
 
 
